@@ -61,6 +61,13 @@ def main(filename="random", verbose=False):
 
         truck_id = bakery.add_trucks(truck_id, scenario_params['trucks'])
 
+        if verbose:
+            print 'Name: %s' % bakery.name
+            print '- Ovens: %i' % len(bakery.ovens)
+            print '- Kneading Machines: %i' % len(bakery.kneading_machines)
+            print '- Dough Prep Tables: %i' % len(bakery.dough_prep_tables)
+            print '- Trucks: %i' % len(bakery.trucks)
+
         bakery_list.append(bakery)
 
 
@@ -79,6 +86,11 @@ def main(filename="random", verbose=False):
             client_id = client_id + 1
             client_orders, order_num = customer.order(days, order_num)
             orders_list.extend(client_orders)
+
+
+            if verbose:
+                print '- Name: %s' % customer.name
+                print ' * Orders: %i' % len(client_orders)
 
 
 
