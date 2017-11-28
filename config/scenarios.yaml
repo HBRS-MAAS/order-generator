@@ -1,7 +1,7 @@
 # The scenarios are created randomly. This config file specifies the parameters used by the random generator.
 random: # Scenario name
   meta:
-    days: 10 # Orders spanning 50 days
+    days: 10 # Orders spanning X days
     customers: # Amount of customers generated
       1: 10
       2: 10
@@ -21,25 +21,23 @@ random: # Scenario name
       heating_rate: # chosen at random between max and min
         max: 5
         min: 1
-  products: # chosen at random. Time values are given in seconds for the time being
+  products: # chosen at random.
+    # Time values are given in seconds (at least right now)
     # TODO define if time is real seconds or simulated minutes
-    dough_prep_time: [5, 15] # between .25 and 0.5
-    resting_time: [20, 75] # to 1.25
-    item_prep_time: [2, 5] # per item
-    breads_per_oven: 16 # Multiples of 2
-    baking_time: [12, 25] 
-    baking_temp: [180, 200]
+    dough_prep_time: [5, 15]
+    resting_time: [20, 75]
+    item_prep_time: [2, 5] # time per item
+    breads_per_oven: 16 # Max value, multiples of 2. Min is 4
+    baking_time: [12, 25]
+    baking_temp: [180, 200] # Multiples of 5
     cooling_rate: [5, 20]
-    boxing_temp: [40,60] # <40
-    breads_per_box: 15 # Multiples of 5
+    boxing_temp: [40,60] # <40 Multiples of 5
+    breads_per_box: 15 # Max value, multiples of 5. Min is 5
     production_cost: [0.3, 2]
     sales_price: [2.8, 5.0]
   trucks:
     max: 3
     capacity: 50 # Will always be a multiple of 5
-  grid_size: # The grid is an x * y area, starting in (0, 0)
-    x: 5
-    y: 5
   street_network:
     grid_size: 10 # Squared grid size of x by x
     directed: true # If false, edges are equidistant
