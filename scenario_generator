@@ -6,6 +6,7 @@ import json
 import yaml
 from factory.ordering import Order, Customer
 from factory.production import Bakery
+from factory.delivery import StreetNetwork
 
 
 def get_params(config_file):
@@ -35,6 +36,7 @@ def main(filename="random", verbose=False):
     bakery_list = []
     customer_list = []
     orders_list = []
+    street_network_list = []
 
     # Create bakery names
     bakeries_names = get_params('config/bakeries.yaml')
@@ -47,6 +49,7 @@ def main(filename="random", verbose=False):
     machine_params = bakery_params['kneading_machines']
     table_params = bakery_params['dough_prep_tables']
 
+    streets = StreetNetwork(clients_qty, bakeries_qty, grid)
 
     for n in range(bakeries_qty):
         bakery = Bakery(n+1, bakeries_names[n],
@@ -70,6 +73,8 @@ def main(filename="random", verbose=False):
 
         bakery_list.append(bakery)
 
+        loc = streets.add_node(bakery, 'bakery')
+        bakery.update_location(loc)
 
     print("\nCreating customers and orders...")
 
@@ -87,10 +92,15 @@ def main(filename="random", verbose=False):
             client_orders, order_num = customer.order(days, order_num)
             orders_list.extend(client_orders)
 
+            customer.location = streets.add_node(customer, 'customer')
 
             if verbose:
                 print '- Name: %s' % customer.name
                 print ' * Orders: %i' % len(client_orders)
+
+    print("\nCreating street network...")
+    streets.add_streets()
+    streets.draw(filename)
 
 
 

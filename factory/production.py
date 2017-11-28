@@ -68,6 +68,11 @@ class Bakery(object):
 
         return start_id + quantity
 
+    def update_location(self, location):
+        self.location = location
+        for truck in self.trucks:
+            truck.location = location
+
 
 
 class Oven(object):
