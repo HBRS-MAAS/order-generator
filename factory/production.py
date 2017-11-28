@@ -73,6 +73,13 @@ class Bakery(object):
         for truck in self.trucks:
             truck.location = location
 
+    def export(self):
+        data = self.__dict__.copy()
+        # print data['trucks']
+        data['trucks'] = [truck.__dict__ for truck in self.trucks]
+        data['products'] = [product.__dict__ for product in self.products]
+        data['ovens'] = [oven.__dict__ for oven in self.ovens]
+        return data
 
 
 class Oven(object):

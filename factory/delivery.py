@@ -74,5 +74,19 @@ class StreetNetwork(object):
             plt.savefig("scenarios/%s-scenario.png" % filename)
         plt.show()
 
+    def export(self):
+        data = nx.node_link_data(self.G)
+        # dest = 'street_network.json'
+        del data['graph']
+        del data['multigraph']
+
+        for node in data['nodes']:
+            del node['id']
+
+        # with open(dest, 'w') as f:
+        #     json.dump(data, f, indent=2)
+
+        return data
+
     def get_graph(self):
         return self.G
