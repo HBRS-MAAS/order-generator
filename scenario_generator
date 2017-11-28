@@ -26,6 +26,7 @@ def main(filename="random", verbose=False):
     grid = scenario_params['street_network']['grid_size']
     days = scenario_params['meta']['days']
 
+    truck_id = 1
     oven_id = 1
     machine_id = 1
     table_id = 1
@@ -58,6 +59,7 @@ def main(filename="random", verbose=False):
 
         table_id = bakery.add_prep_tables(table_id, table_params)
 
+        truck_id = bakery.add_trucks(truck_id, scenario_params['trucks'])
 
         bakery_list.append(bakery)
 

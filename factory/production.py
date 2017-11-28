@@ -1,6 +1,11 @@
 import yaml
 from random import randint, shuffle, uniform
 
+from delivery import Truck
+
+truck_number = 1
+
+
 class Bakery(object):
     """docstring for Bakery."""
     def __init__(self, guid, name, location=None,
@@ -32,6 +37,16 @@ class Bakery(object):
 
         return start_id + quantity
 
+    def add_trucks(self, start_id=1, params=None, quantity=2, capacity=50):
+        if params:
+            quantity = randint(1, params['max'])
+            capacity = randint(25, params['capacity']*5)/5
+
+        for t in range(start_id, start_id+quantity):
+            x = Truck(t, location=self.location, capacity=capacity)
+            self.trucks.append(x)
+
+        return start_id + quantity
 
     def add_kneading_machines(self, start_id=1, params=None, quantity=2):
         if params:
