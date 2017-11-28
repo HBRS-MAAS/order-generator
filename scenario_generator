@@ -4,6 +4,7 @@ import argparse
 import sys
 import json
 import yaml
+from factory.ordering import Order, Customer
 from factory.production import Bakery
 
 
@@ -28,7 +29,11 @@ def main(filename="random", verbose=False):
     oven_id = 1
     machine_id = 1
     table_id = 1
+    order_num = 1
+
     bakery_list = []
+    customer_list = []
+    orders_list = []
 
     # Create bakery names
     bakeries_names = get_params('config/bakeries.yaml')
@@ -55,6 +60,23 @@ def main(filename="random", verbose=False):
 
 
         bakery_list.append(bakery)
+
+
+    print("\nCreating customers and orders...")
+
+    client_id = 1
+    # This is iterating through all the clients in the customer.yaml file
+    # The meta information in scenarios.yaml must match
+    # TODO Iterates only on what is specified in scenario.yaml
+    for category, customers in client_params.items():
+        if verbose:
+            print 'Category %i' % category
+        for client in customers:
+            customer = Customer(client_id, client, category=category)
+            customer_list.append(customer)
+            client_id = client_id + 1
+            client_orders, order_num = customer.order(days, order_num)
+            orders_list.extend(client_orders)
 
 
 
