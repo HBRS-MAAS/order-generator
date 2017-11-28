@@ -4,6 +4,7 @@ import argparse
 import sys
 import json
 import yaml
+from factory.production import Bakery
 
 
 def get_params(config_file):
@@ -23,6 +24,37 @@ def main(filename="random", verbose=False):
     clients_qty = sum(scenario_params['meta']['customers'].values())
     grid = scenario_params['street_network']['grid_size']
     days = scenario_params['meta']['days']
+
+    oven_id = 1
+    machine_id = 1
+    table_id = 1
+    bakery_list = []
+
+    # Create bakery names
+    bakeries_names = get_params('config/bakeries.yaml')
+
+    # Generate bakeries
+    print("\nCreating bakeries....")
+
+    bakery_params = scenario_params['bakeries']
+    product_params = scenario_params['products']
+    machine_params = bakery_params['kneading_machines']
+    table_params = bakery_params['dough_prep_tables']
+
+
+    for n in range(bakeries_qty):
+        bakery = Bakery(n+1, bakeries_names[n],
+                        products=products, product_params=product_params)
+
+        oven_id = bakery.add_ovens(start_id=oven_id,
+                                   params=bakery_params['ovens'])
+
+        machine_id = bakery.add_kneading_machines(machine_id, machine_params)
+
+        table_id = bakery.add_prep_tables(table_id, table_params)
+
+
+        bakery_list.append(bakery)
 
 
 
