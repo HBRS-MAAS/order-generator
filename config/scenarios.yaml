@@ -21,14 +21,15 @@ random: # Scenario name
       heating_rate: # chosen at random between max and min
         max: 5
         min: 1
-  products: # chosen at random
-    dough_prep_time: [0.25, 0.5] # between .25 and 0.5
-    resting_time: [0.33, 1.25] # to 1.25
-    item_prep_time: [0.02, 0.1] # per item
+  products: # chosen at random. Time values are given in seconds for the time being
+    # TODO define if time is real seconds or simulated minutes
+    dough_prep_time: [5, 15] # between .25 and 0.5
+    resting_time: [20, 75] # to 1.25
+    item_prep_time: [2, 5] # per item
     breads_per_oven: 16 # Multiples of 2
-    baking_time: [0.2,0.4]
+    baking_time: [12, 25] 
     baking_temp: [180, 200]
-    cooling_rate: [0.01,0.03]
+    cooling_rate: [5, 20]
     boxing_temp: [40,60] # <40
     breads_per_box: 15 # Multiples of 5
     production_cost: [0.3, 2]

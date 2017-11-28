@@ -94,14 +94,24 @@ class Product(object):
     """docstring for Product."""
     def __init__(self, id, params):
         self.guid = id
-        self.dough_prep_time = uniform(*params['dough_prep_time'])
-        self.resting_time = uniform(*params['resting_time'])
-        self.item_prep_time = uniform(*params['item_prep_time'])
-        self.breads_per_oven = randint(4, params['breads_per_oven']*2)/2
-        self.baking_time = uniform(*params['baking_time'])
-        self.baking_temp = uniform(*params['baking_temp'])
-        self.cooling_rate = uniform(*params['cooling_rate'])
-        self.boxing_temp = uniform(*params['boxing_temp'])
-        self.breads_per_box = randint(25, params['breads_per_box']*5)/5
-        self.production_cost = uniform(*params['production_cost'])
-        self.sales_price = uniform(*params['sales_price'])
+
+        # Preparation
+        self.dough_prep_time = randint(*params['dough_prep_time'])
+        self.resting_time = randint(*params['resting_time'])
+        self.item_prep_time = randint(*params['item_prep_time'])
+
+        # Baking
+        self.breads_per_oven = randint(4, params['breads_per_oven'])
+        self.breads_per_oven = self.breads_per_oven - self.breads_per_oven % 2
+        self.baking_time = randint(*params['baking_time'])
+        self.baking_temp = randint(*params['baking_temp'])
+        self.baking_temp = self.baking_temp - self.baking_temp % 5
+        self.cooling_rate = randint(*params['cooling_rate'])
+
+        # Packaging
+        self.boxing_temp = randint(*params['boxing_temp'])
+        self.boxing_temp = self.boxing_temp - self.boxing_temp % 5
+        self.breads_per_box = randint(5, params['breads_per_box'])
+        self.breads_per_box = self.breads_per_box - self.breads_per_box % 5
+        self.production_cost = round(uniform(*params['production_cost']), 2)
+        self.sales_price = round(uniform(*params['sales_price']), 2)
