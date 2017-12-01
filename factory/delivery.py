@@ -21,7 +21,6 @@ class Truck(object):
 class StreetNetwork(object):
     def __init__(self, customers, bakeries, size):
         G = nx.Graph()
-        pos = {}
         self.mapping = {}
         self.bakery_nodes = []
         self.customer_nodes = []
@@ -65,7 +64,7 @@ class StreetNetwork(object):
             # Add euclidean distance multiplied by some value
             loc1 = self.G.nodes[edge[0]]['location']
             loc2 = self.G.nodes[edge[1]]['location']
-            dist = ((loc1['x']-loc2['x'])**2 + (loc2['y']-loc2['y'])**2)**0.5
+            dist = ((loc1['x']-loc2['x'])**2 + (loc1['y']-loc2['y'])**2)**0.5
             self.G.edges[edge]['dist'] = dist * uniform(1.0, 2.0)
 
     def draw(self, filename=None, verbose=False):
@@ -82,15 +81,11 @@ class StreetNetwork(object):
 
     def export(self):
         data = nx.node_link_data(self.G)
-        # dest = 'street_network.json'
         del data['graph']
         del data['multigraph']
 
         for node in data['nodes']:
             del node['id']
-
-        # with open(dest, 'w') as f:
-        #     json.dump(data, f, indent=2)
 
         return data
 

@@ -19,7 +19,7 @@ class Bakery(object):
         self.kneading_machines = []
 
         if not products or not product_params:
-            print "Error! Missing product list"
+            print("Error! Missing product list")
         else:
             self.products = []
             shuffle(products)
@@ -75,7 +75,6 @@ class Bakery(object):
 
     def export(self):
         data = self.__dict__.copy()
-        # print data['trucks']
         data['trucks'] = [truck.__dict__ for truck in self.trucks]
         data['products'] = [product.__dict__ for product in self.products]
         data['ovens'] = [oven.__dict__ for oven in self.ovens]
