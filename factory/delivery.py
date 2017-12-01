@@ -21,7 +21,6 @@ class Truck(object):
 class StreetNetwork(object):
     def __init__(self, customers, bakeries, size):
         G = nx.Graph()
-        pos = {}
         self.mapping = {}
         self.bakery_nodes = []
         self.customer_nodes = []
@@ -82,15 +81,11 @@ class StreetNetwork(object):
 
     def export(self):
         data = nx.node_link_data(self.G)
-        # dest = 'street_network.json'
         del data['graph']
         del data['multigraph']
 
         for node in data['nodes']:
             del node['id']
-
-        # with open(dest, 'w') as f:
-        #     json.dump(data, f, indent=2)
 
         return data
 
