@@ -1,5 +1,7 @@
 # Scenario generator
 [![Build Status](https://travis-ci.org/HBRS-MAAS/scenario-generator.svg?branch=master)](https://travis-ci.org/HBRS-MAAS/scenario-generator)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=scenario_generator)](https://sonarcloud.io/dashboard?id=scenario_generator)
+
 
 Creates a random scenario based on the parameters from the `scenarios.yaml` config file.
 
