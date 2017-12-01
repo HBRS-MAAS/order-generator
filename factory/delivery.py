@@ -63,7 +63,7 @@ class StreetNetwork(object):
             dist = ((loc1['x']-loc2['x'])**2 + (loc2['y']-loc2['y'])**2)**0.5
             self.G.edges[edge]['dist'] = dist * uniform(1.0, 2.0)
 
-    def draw(self, filename=None):
+    def draw(self, filename=None, verbose=False):
         nx.draw(self.F, self.pos, font_size=11, node_size=500,
                 with_labels=True,
                 node_color='w')
@@ -72,7 +72,8 @@ class StreetNetwork(object):
                                node_shape='s', node_size=800)
         if filename:
             plt.savefig("scenarios/%s-scenario.png" % filename)
-        plt.show()
+        if verbose:
+            plt.show()
 
     def export(self):
         data = nx.node_link_data(self.G)

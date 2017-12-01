@@ -150,7 +150,7 @@ def main(filename="random", verbose=False):
 
     print("\nCreating street network...")
     streets.add_streets()
-    streets.draw(filename)
+    streets.draw(filename, verbose)
 
     export_json(dest, scenario=scenario_params, customers=customer_list,
                 orders=orders_list,
