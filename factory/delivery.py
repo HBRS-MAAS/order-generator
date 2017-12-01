@@ -2,6 +2,11 @@ from random import randint, uniform
 import networkx as nx
 import json
 from utils import location
+import os
+import matplotlib as mpl
+if os.environ.get('DISPLAY', '') == '':
+    print('no display found. Using non-interactive Agg backend')
+    mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 
