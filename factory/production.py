@@ -19,7 +19,7 @@ class Bakery(object):
         self.kneading_machines = []
 
         if not products or not product_params:
-            print "Error! Missing product list"
+            print("Error! Missing product list")
         else:
             self.products = []
             shuffle(products)
