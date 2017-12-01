@@ -64,7 +64,7 @@ class StreetNetwork(object):
             # Add euclidean distance multiplied by some value
             loc1 = self.G.nodes[edge[0]]['location']
             loc2 = self.G.nodes[edge[1]]['location']
-            dist = ((loc1['x']-loc2['x'])**2 + (loc2['y']-loc2['y'])**2)**0.5
+            dist = ((loc1['x']-loc2['x'])**2 + (loc1['y']-loc2['y'])**2)**0.5
             self.G.edges[edge]['dist'] = dist * uniform(1.0, 2.0)
 
     def draw(self, filename=None, verbose=False):
